@@ -1,0 +1,21 @@
+[Unit]
+Description=Horizon Weaver inference gateway (operator-configured LiteLLM)
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+ConditionPathExists=/etc/horizon-weaver/gateway/gateway.env
+ConditionPathExists=/etc/horizon-weaver/gateway/config.yaml
+StartLimitIntervalSec=600
+StartLimitBurst=3
+
+[Service]
+Type=simple
+# This root-owned lifecycle wrapper controls Docker; agents never receive its socket.
+ExecStart=/usr/bin/docker compose --env-file /etc/horizon-weaver/gateway/gateway.env -f /usr/share/horizon-weaver/gateway/compose.yaml up --abort-on-container-exit --exit-code-from gateway
+ExecStop=/usr/bin/docker compose --env-file /etc/horizon-weaver/gateway/gateway.env -f /usr/share/horizon-weaver/gateway/compose.yaml down --timeout 15
+Restart=on-failure
+RestartSec=30
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target

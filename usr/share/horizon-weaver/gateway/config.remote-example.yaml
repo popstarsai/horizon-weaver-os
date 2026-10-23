@@ -1,0 +1,32 @@
+# Explicit opt-in: horizon-hybrid can send observations and memory to a provider.
+# This is a complete alternative config, not a file that is merged automatically.
+model_list:
+  - model_name: horizon-local
+    litellm_params:
+      model: os.environ/HW_LOCAL_MODEL
+      api_base: os.environ/HW_LOCAL_API_BASE
+      api_key: os.environ/HW_LOCAL_API_KEY
+  - model_name: horizon-local-backup
+    litellm_params:
+      model: os.environ/HW_BACKUP_MODEL
+      api_base: os.environ/HW_BACKUP_API_BASE
+      api_key: os.environ/HW_BACKUP_API_KEY
+  - model_name: horizon-hybrid
+    litellm_params:
+      model: os.environ/HW_LOCAL_MODEL
+      api_base: os.environ/HW_LOCAL_API_BASE
+      api_key: os.environ/HW_LOCAL_API_KEY
+  - model_name: horizon-remote
+    litellm_params:
+      model: os.environ/HW_REMOTE_MODEL
+      api_base: os.environ/HW_REMOTE_API_BASE
+      api_key: os.environ/HW_REMOTE_API_KEY
+router_settings:
+  routing_strategy: simple-shuffle
+  num_retries: 1
+  timeout: 30
+  fallbacks:
+    - horizon-local: [horizon-local-backup]
+    - horizon-hybrid: [horizon-remote]
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY

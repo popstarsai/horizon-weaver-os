@@ -1,0 +1,8 @@
+[Unit]
+Description=Horizon Weaver experimental native agents
+Documentation=https://github.com/popstarsai/horizon-weaver-os
+After=network-online.target
+Wants=network-online.target
+
+[Install]
+WantedBy=multi-user.target

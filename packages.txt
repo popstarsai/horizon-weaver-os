@@ -65,6 +65,7 @@ mariadb-connector-c
 libpq
 dotnet-runtime-10.0
 python3-poetry-core
+python3  # Horizon Weaver native agent layer (stdlib, Python >= 3.11)
 
 # --- GUI applications (Google Chrome is in build.sh, from Google's repo) ----
 nautilus

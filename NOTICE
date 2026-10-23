@@ -1,0 +1,13 @@
+Horizon Weaver OS
+Experimental native agent layer developed for Pop Stars AI LLC.
+
+This work is derived from AgenticLinux:
+https://github.com/ericcurtin/agenticlinux
+Upstream source is licensed under the Apache License, Version 2.0.
+The upstream LICENSE is retained unchanged. Horizon Weaver additions are also
+provided under Apache-2.0. Bundled third-party packages retain their own licenses.
+
+The Horizon Weaver v0.1 changes add Markdown agent definitions, reusable skills,
+systemd supervision, a read-only MCP server, an inference-gateway configuration,
+an experimental planning loop, tests and documentation. The upstream bootc,
+bootguard, Docker/Sandboxes, GPU and atomic-update implementations are retained.

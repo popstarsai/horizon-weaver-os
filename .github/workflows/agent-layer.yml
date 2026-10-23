@@ -1,0 +1,22 @@
+name: Native agent layer
+on:
+  push:
+    branches: [main, 'feat/native-agent-layer-*']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate Markdown definitions and offline runtime boundaries
+        run: |
+          python3 -I usr/libexec/horizon-weaver/supervisor.py --vendor usr/share/horizon-weaver --admin /nonexistent
+          python3 -m unittest discover -s test -p agent_layer_test.py -v
+          python3 -m py_compile usr/libexec/horizon-weaver/*.py
+          git diff --check
