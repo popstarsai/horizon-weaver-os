@@ -1,0 +1,7 @@
+# Copy to /etc/horizon-weaver/supervisor.toml and opt in after gateway setup.
+schema_version = 1
+enabled = false
+max_steps = 8
+runtime_sec = 300
+gateway_url = "http://127.0.0.1:4000/v1/chat/completions"
+allowed_models = ["horizon-local"]

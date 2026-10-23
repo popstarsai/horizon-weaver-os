@@ -1,0 +1,21 @@
+name: horizon-weaver-gateway
+services:
+  gateway:
+    # Choose a reviewed LiteLLM image by digest; there is no floating default.
+    image: ${LITELLM_IMAGE:?Set LITELLM_IMAGE to a reviewed image@sha256 digest}
+    command: ["--config", "/config/config.yaml", "--host", "127.0.0.1", "--port", "4000"]
+    network_mode: host
+    user: "65532:65532"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    tmpfs: ["/tmp:rw,nosuid,nodev,size=128m,mode=1777"]
+    volumes:
+      - /etc/horizon-weaver/gateway/config.yaml:/config/config.yaml:ro,Z
+    env_file: /etc/horizon-weaver/gateway/gateway.env
+    environment:
+      HOME: /tmp
+      LITELLM_TELEMETRY: "False"
+    mem_limit: 1g
+    pids_limit: 128
+    restart: "no"

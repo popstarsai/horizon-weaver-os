@@ -1,0 +1,4 @@
+#!/bin/sh
+# SPDX-License-Identifier: Apache-2.0
+# systemd supplies normal, early, late output directories. Only normal is used.
+exec /usr/bin/python3 -I /usr/libexec/horizon-weaver/supervisor.py --trusted --generate "$1"

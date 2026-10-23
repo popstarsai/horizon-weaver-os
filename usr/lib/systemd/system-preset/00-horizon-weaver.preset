@@ -1,0 +1,3 @@
+# Native agents require an administrator to configure and opt in.
+disable horizon-weaver.target
+disable horizon-weaver-gateway.service

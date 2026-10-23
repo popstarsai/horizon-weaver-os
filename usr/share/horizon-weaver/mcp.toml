@@ -1,0 +1,4 @@
+# The bundled stdio server supports this specific MCP revision, not draft MCP.
+schema_version = 1
+protocol_version = "2025-11-25"
+allowed_tools = ["system.snapshot", "system.failed_units", "system.unit_status", "system.bootc_status", "system.update_timer"]

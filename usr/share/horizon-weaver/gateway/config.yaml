@@ -1,0 +1,20 @@
+# Default policy: both primary and fallback stay on this machine.
+model_list:
+  - model_name: horizon-local
+    litellm_params:
+      model: os.environ/HW_LOCAL_MODEL
+      api_base: os.environ/HW_LOCAL_API_BASE
+      api_key: os.environ/HW_LOCAL_API_KEY
+  - model_name: horizon-local-backup
+    litellm_params:
+      model: os.environ/HW_BACKUP_MODEL
+      api_base: os.environ/HW_BACKUP_API_BASE
+      api_key: os.environ/HW_BACKUP_API_KEY
+router_settings:
+  routing_strategy: simple-shuffle
+  num_retries: 1
+  timeout: 30
+  fallbacks:
+    - horizon-local: [horizon-local-backup]
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY

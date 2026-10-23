@@ -25,3 +25,9 @@
 *.swp
 *~
 .DS_Store
+
+# Horizon Weaver local validation and credentials (never commit provider keys).
+__pycache__/
+*.pyc
+/horizon-weaver-generated/
+/gateway.env
